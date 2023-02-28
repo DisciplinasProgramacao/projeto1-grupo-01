@@ -34,7 +34,7 @@ public class produto {
 
 	public void setMargemLucro(double margemLucro) {
 		
-		if(30 < margemLucro && margemLucro < 80 ) {
+		if(30 > margemLucro || margemLucro > 80 ) {
 			throw new IllegalArgumentException("A margem de lucro deve estar entre 30% e 80%.");
 		}
 		this.margemLucro = (margemLucro/100) * this.getPrecoCusto()	- this.getPrecoCusto() ;
