@@ -7,10 +7,12 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 * Henrique Santana Diniz
 * Lucas Tabosa Guedes
 * Vinícios Gonzaga Guilherme
+* Diego Machado Cordeiro
 
 
 ## Professores responsáveis
 
 * João Caram Santos de Oliveira
+* Cleiton Silva Tavares
 
 
