@@ -1,5 +1,5 @@
 
-public class produto {
+public class Produto {
 	
 	private String descricao;
 	private double precoCusto;
@@ -13,7 +13,7 @@ public class produto {
 	private int quantidadeEstoque;
 	
 	
-	public produto(String descricao, double precoCusto, double precoVenda, int quantidadeVendida,
+	public Produto(String descricao, double precoCusto, double precoVenda, int quantidadeVendida,
 			double totalArrecadado, int quantidadeAdquirida, double custoAquisicao, double impostos, double margemLucro, int quantidadeEstoque) {
 		super();
 		this.descricao = descricao;
@@ -32,7 +32,7 @@ public class produto {
 		return margemLucro;
 	}
 
-	public void setMargemLucro(double margemLucro) {
+	public void setMargemLucro(double percentMargemLucro) {
 		
 		if(30 > margemLucro || margemLucro > 80 ) {
 			throw new IllegalArgumentException("A margem de lucro deve estar entre 30% e 80%.");
@@ -55,6 +55,7 @@ public class produto {
 	public double getPrecoVenda() {
 		return precoVenda;
 	}
+	//mudar precocusto
 	public void setPrecoVenda() {
 		this.precoVenda = this.getPrecoCusto() + this.getPrecoCusto() + this.getImpostos();
 	}
@@ -85,6 +86,8 @@ public class produto {
 	public double getImpostos() {
 		return impostos;
 	}
+	
+	// colocar 1.18 uma variavel
 	public void setImpostos() {
 		this.impostos = (this.getPrecoCusto() + this.getMargemLucro()) * 1.18;
 	}
