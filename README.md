@@ -8,6 +8,7 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 * Lucas Tabosa Guedes
 * Vinícius Gonzaga Guilherme
 * Diego Machado Cordeiro
+* Klaus Leão Teles
 
 
 ## Professores responsáveis
