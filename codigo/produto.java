@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 /**
 * Esta classe representa um objeto produto com os atributos descricao,preço que foi 
  * comprado o produto, preço de venda do produto, quantidadede produtis vendida, total arrecado
@@ -6,6 +9,8 @@
  * @author 1402031
  *
  */
+
+
 public class Produto {
 	
 	private String descricao;
@@ -49,11 +54,10 @@ public class Produto {
 	 * @param percentMargemLucro 
 	 */
 	public void setMargemLucro(double percentMargemLucro) {
-		
-		if(30 > margemLucro || margemLucro > 80 ) {
+		if(30 > percentMargemLucro || percentMargemLucro > 80 ) {
 			throw new IllegalArgumentException("A margem de lucro deve estar entre 30% e 80%.");
 		}
-		this.margemLucro = (margemLucro/100) * this.getPrecoCusto()	- this.getPrecoCusto() ;
+		this.margemLucro = (percentMargemLucro/100) * this.getPrecoCusto();
 	}
 
 	/**
@@ -68,8 +72,13 @@ public class Produto {
 	 * @param descricao
 	 */
 	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+    		if(descricao.length() <= 3) {
+        		throw new IllegalArgumentException("A descrição deve ter pelo menos 3 caracteres.");
+   		 } else {
+        		this.descricao = descricao;
+   		 }
 	}
+
 	
 	/**
 	 * Retorna o preço de custo
@@ -97,7 +106,7 @@ public class Produto {
 	}
 	//mudar precocusto
 	public void setPrecoVenda() {
-		this.precoVenda = this.getPrecoCusto() + this.getPrecoCusto() + this.getImpostos();
+		this.precoVenda = this.getPrecoCusto() + this.getMargemLucro() + this.getImpostos();
 	}
 	/**
 	 * Retorna a quantidade vendida
@@ -163,22 +172,13 @@ public class Produto {
 		return impostos;
 	}
 	
-	// colocar 1.18 uma variavel
-	
 	/**
 	 * set dos impostos sobre os produtos 
 	 */
 	public void setImpostos() {
-		this.impostos = (this.getPrecoCusto() + this.getMargemLucro()) * 1.18;
+		this.impostos = (this.getPrecoCusto() + this.getMargemLucro()) * 1.18 - (this.getPrecoCusto() + this.getMargemLucro());
 	}
-	
-	/**
-	 * Retorna booleano de descrição valida
-	 * @return descrição valida
-	 */
-	 public boolean temDescricaoValida() {
-	        return this.getDescricao().length() >= 3;
-	    }
+
 	 
 	 /**
 	  * Retorna a quantidade de produtos no estoque
@@ -187,6 +187,17 @@ public class Produto {
 
 	public int getQuantidadeEstoque() {
 		return quantidadeEstoque;
+	}
+	
+	public void monitorarEstoque(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Digite em unidades o estoque mínimo desse produto");
+		int n = scanner.nextInt();
+		if(n > this.getQuantidadeEstoque()) {
+			System.out.println("O produto tem falta no estoque, existindo " + this.getQuantidadeEstoque() + "unidades desse produto no estoque." );
+		}else {
+			System.out.println("Não está há falta desse produto no estoque, existindo " + this.getQuantidadeEstoque() + "unidades desse produto no estoque.");
+		}
 	}
 
 	/**
