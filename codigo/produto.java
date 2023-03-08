@@ -22,19 +22,18 @@ public class Produto {
 	/** 
 	 * Cria um novo objeto produto com os dados fornecidos */
 	
-	public Produto(String descricao, double precoCusto, double precoVenda, int quantidadeVendida,
-			double totalArrecadado, int quantidadeAdquirida, double custoAquisicao, double impostos, double margemLucro, int quantidadeEstoque) {
+	public Produto() {
 		super();
-		this.descricao = descricao;
-		this.precoCusto = precoCusto;
-		this.precoVenda = precoVenda;
-		this.quantidadeVendida = quantidadeVendida;
-		this.totalArrecadado = totalArrecadado;
-		this.quantidadeAdquirida = quantidadeAdquirida;
-		this.custoAquisicao = custoAquisicao;
-		this.impostos = impostos;
-		this.margemLucro = margemLucro;
-		this.quantidadeEstoque = quantidadeEstoque;
+		this.descricao = "Ainda não foi adicionada uma descrição para esse produto" ;
+		this.precoCusto = 0.0;
+		this.precoVenda = 0.0;
+		this.quantidadeVendida = 0;
+		this.totalArrecadado = 0.0;
+		this.quantidadeAdquirida = 0;
+		this.custoAquisicao = 0.0;
+		this.impostos = 0.0;
+		this.margemLucro = 0.0;
+		this.quantidadeEstoque = 0;
 	}
 	/** 
 	 * Retorna a margem de lucro
