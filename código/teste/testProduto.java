@@ -1,28 +1,54 @@
-importar  org . junit . Teste ;
-importar  org estático  . junit . Afirmar .*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
+import org.junit.Test;
 
-class  TesteProduto {
+public class ProdutoTest {
 
+    
 
-	@ Teste
-	public  void  testSetPrecoVenda () {
-	    Produto  p = novo  Produto ( "Camisa" , 10,0 , 20,0 , 5 , 100,0 , 10 , 8,0 , 1,5 , 50,0 , 5 );
-	    pág . setPrecoCusto ( 12.0 );
-	    pág . setCustoAquisicao ( 9.0 );
-	    pág . setImpostos ();
-	    pág . setPrecoVenda ();
-	    assertEquals ( 24.42 , p . getPrecoVenda (), 0.01 );
-	}
+    @Test
+    public void testSetDescricao() {
+    	Produto produto = new Produto();
+        String descricao = "Produto Teste";
+        produto.setDescricao(descricao);
+        assertEquals(descricao, produto.getDescricao());
+    }
 
+    @Test
+    public void testSetMargemLucro() {
+    	Produto produto = new Produto();
+        double margemLucro = 30;
+        double precoCusto = 100;
+        produto.setPrecoCusto(precoCusto);
+        produto.setMargemLucro(margemLucro);
+        assertEquals(30, produto.getMargemLucro(), 0.001);
+    }
 
-	@ Teste
-	public  void  testSetImpostos () {
-	    Produto  produto = novo  Produto ( "Camiseta" , 50,00 , 80,00 , 10 , 800,00 , 20 , 40,00 , 0,0 , 50,0 , 10 );
-	    produto . setImpostos ();
-	    assertEquals ( 29.60 , produto . getImpostos (), 0.001 );
-	}
+    @Test
+    public void testSetPrecoVenda() {
+    	Produto produto = new Produto();
+        double custo = 100.0;
+        double margemLucro = 30;
+        double precoEsperado = 130 * 1.18;
+        produto.setPrecoCusto(custo);
+        produto.setMargemLucro(margemLucro);
+        produto.setImpostos();
+        produto.setPrecoVenda();
+        assertEquals(precoEsperado, produto.getPrecoVenda(), 0.001);
+    }
 
-
+    @Test
+    public void testSetImpostos() {
+    	Produto produto = new Produto();
+        double custo = 100.0;
+        double margemLucro = 30;
+        double impostoEsperado = 130 * 1.18 - 130;
+        produto.setPrecoCusto(custo);
+        produto.setMargemLucro(margemLucro);
+        produto.setImpostos();
+        assertEquals(impostoEsperado, produto.getImpostos(), 0.001);
+    }
 
 }
+
