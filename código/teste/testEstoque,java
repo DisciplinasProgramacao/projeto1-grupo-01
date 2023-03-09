@@ -1,5 +1,6 @@
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,5 +12,28 @@ class EstoqueTest {
         Produto produto = new Produto();
         assertTrue(estoque.adicionarProduto(produto));
         assertEquals(1, estoque.getQuantidadeProdutos());
+    }
+    
+    	 @Test
+	    public void testGetProdutosAbaixoDoMinimo() {
+	        Estoque estoque = new Estoque(50);
+	        
+	        Produto p1 = new Produto();
+	        estoque.adicionarProduto(p1);
+	        
+	        p1.setQuantidadeEstoque(15, 0);
+	
+	        ArrayList<Produto> produtosAbaixo = estoque.getProdutosAbaixoDoMinimo();
+	        
+	        assertFalse(produtosAbaixo.contains(p1));
+	    }
+	 
+	@Test
+    public void testRemoverProduto() {
+        Estoque estoque = new Estoque(10);
+        Produto produto = new Produto();
+        estoque.adicionarProduto(produto);
+        assertTrue(estoque.removerProduto(produto));
+        assertEquals(0, estoque.getQuantidadeProdutos());
     }
 }
