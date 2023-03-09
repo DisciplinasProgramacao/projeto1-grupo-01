@@ -13,4 +13,34 @@ public class Estoque {
 	public int getQuantidadeProdutos() {
         return produtos.size();
     }
+	
+	public ArrayList<Produto> getProdutosAbaixoDoMinimo(){
+		ArrayList<Produto> produtosAbaixoDoMinimo = new ArrayList<Produto>();
+		for(Produto p : produtos) {
+			if(p.monitorarEstoque()) {
+				produtosAbaixoDoMinimo.add(p);
+			}
+		}
+		return produtosAbaixoDoMinimo;
+	}
+	
+	public boolean adicionarProduto(Produto novo) {
+		if(produtos.size() < tamanhoMaximo) {
+			produtos.add(novo);
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	public boolean removerProduto(Produto remover) {
+		int index = produtos.indexOf(remover);
+		if(index >= 0) {
+			produtos.remove(index);
+			return true;
+		}
+		return false;
+	}
 }
