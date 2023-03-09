@@ -23,6 +23,7 @@ public class Produto {
 	private double impostos;
 	private double margemLucro;
 	private int quantidadeEstoque;
+	private int quantidadeMinima;
 	
 	/** 
 	 * Cria um novo objeto produto com os dados fornecidos */
@@ -189,21 +190,25 @@ public class Produto {
 		return quantidadeEstoque;
 	}
 	
-	public void monitorarEstoque(){
+	public boolean monitorarEstoque(){
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Digite em unidades o estoque mínimo desse produto");
 		int n = scanner.nextInt();
 		if(n > this.getQuantidadeEstoque()) {
 			System.out.println("O produto tem falta no estoque, existindo " + this.getQuantidadeEstoque() + "unidades desse produto no estoque." );
+			return true;
 		}else {
 			System.out.println("Não está há falta desse produto no estoque, existindo " + this.getQuantidadeEstoque() + "unidades desse produto no estoque.");
+			return true;
 		}
 	}
 
 	/**
 	 * Set da quantidade de produtos no estoque
 	 */
-	public void setQuantidadeEstoque() {
-		this.quantidadeEstoque = this.getQuantidadeAdquirida() - this.getQuantidadeVendida();
+	public void setQuantidadeEstoque(int quantidadeAdquirida,int quantidadeVendida) {
+		this.quantidadeAdquirida = quantidadeAdquirida;
+	    this.quantidadeVendida = quantidadeVendida;
+	    this.quantidadeEstoque = this.quantidadeAdquirida - this.quantidadeVendida;
 	}
 }
