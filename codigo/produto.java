@@ -199,7 +199,7 @@ public class Produto {
 			return true;
 		}else {
 			System.out.println("Não está há falta desse produto no estoque, existindo " + this.getQuantidadeEstoque() + "unidades desse produto no estoque.");
-			return true;
+			return false;
 		}
 	}
 
