@@ -61,6 +61,14 @@ public class Estoque {
         }
     }
 	
+	public double getValorTotalEstoque() {
+		double valortotal =0;
+		for(Produto p: produtos) {
+			valortotal += p.getPrecoVenda() * p.getQuantidadeEstoque();
+		}
+		return valortotal;
+	}
+
 	
 	
 }
