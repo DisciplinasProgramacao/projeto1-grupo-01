@@ -78,6 +78,16 @@ class EstoqueTest {
 			
 			assertEquals(30, produto.getQuantidadeEstoque());
 		}
+	 @Test
+	 void testValorTotalEstoque() {
+		 Estoque estoque = new Estoque(10);
+		Produto produto = new Produto();
+		estoque.adicionarProduto(produto);
+		produto.setQuantidadeEstoque(10, 0);
+		produto.setPrecoCusto(50);
+		produto.setMargemLucro(40);
+		assertEquals(700,estoque.getValorTotalEstoque()); 
+	 }
 
 	 
 }
