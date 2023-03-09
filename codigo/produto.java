@@ -59,6 +59,7 @@ public class Produto {
 			throw new IllegalArgumentException("A margem de lucro deve estar entre 30% e 80%.");
 		}
 		this.margemLucro = (percentMargemLucro/100) * this.getPrecoCusto();
+		setPrecoVenda();
 	}
 
 	/**
@@ -107,8 +108,9 @@ public class Produto {
 	}
 	//mudar precocusto
 	public void setPrecoVenda() {
-		this.precoVenda = this.getPrecoCusto() + this.getMargemLucro() + this.getImpostos();
+	    this.precoVenda = this.getPrecoCusto() + this.getMargemLucro() + this.getImpostos();
 	}
+
 	/**
 	 * Retorna a quantidade vendida
 	 * @return quatidade vendida
