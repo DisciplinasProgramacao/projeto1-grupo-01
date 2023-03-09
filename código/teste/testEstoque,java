@@ -13,8 +13,7 @@ class EstoqueTest {
         assertTrue(estoque.adicionarProduto(produto));
         assertEquals(1, estoque.getQuantidadeProdutos());
     }
-    
-    	 @Test
+	 @Test
 	    public void testGetProdutosAbaixoDoMinimo() {
 	        Estoque estoque = new Estoque(50);
 	        
@@ -24,7 +23,7 @@ class EstoqueTest {
 	        p1.setQuantidadeEstoque(15, 0);
 	
 	        ArrayList<Produto> produtosAbaixo = estoque.getProdutosAbaixoDoMinimo();
-	        
+	        //escreva um numero abaixo de 15
 	        assertFalse(produtosAbaixo.contains(p1));
 	    }
 	 
@@ -36,4 +35,49 @@ class EstoqueTest {
         assertTrue(estoque.removerProduto(produto));
         assertEquals(0, estoque.getQuantidadeProdutos());
     }
+	
+	 @Test
+	    public void testComprarProduto() {
+	        Produto produto1 = new Produto();
+	        
+	        Estoque estoque = new Estoque(10);
+	        
+	        estoque.adicionarProduto(produto1);
+	        
+	        estoque.comprarProduto(produto1, 20);
+	        
+	        
+	        assertEquals(20, produto1.getQuantidadeEstoque());
+	        
+	 
+	    }
+
+	
+	 
+	 @Test
+	    public void testGetQuantidadeProdutos() {
+	        Estoque estoque = new Estoque(10);
+	        Produto produto1 = new Produto();
+	        Produto produto2 = new Produto();
+	        estoque.adicionarProduto(produto1);
+	        estoque.adicionarProduto(produto2);
+	        assertEquals(2, estoque.getQuantidadeProdutos());
+	    }
+	 
+
+	 @Test
+		void testVenderProduto() {
+			Estoque estoque = new Estoque(10);
+			
+			Produto produto = new Produto();
+		
+			estoque.adicionarProduto(produto);
+			produto.setQuantidadeEstoque(40, 0);
+
+			estoque.venderProduto(produto, 10);
+			
+			assertEquals(30, produto.getQuantidadeEstoque());
+		}
+
+	 
 }
