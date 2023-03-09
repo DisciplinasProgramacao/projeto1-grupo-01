@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class Estoque {
@@ -13,6 +12,7 @@ public class Estoque {
 	public int getQuantidadeProdutos() {
         return produtos.size();
     }
+	
 	
 	public ArrayList<Produto> getProdutosAbaixoDoMinimo(){
 		ArrayList<Produto> produtosAbaixoDoMinimo = new ArrayList<Produto>();
@@ -43,4 +43,24 @@ public class Estoque {
 		}
 		return false;
 	}
+	
+	public void comprarProduto(Produto produtoComprado,int quantidadeComprada) {
+		int indexProduto = produtos.indexOf(produtoComprado);
+		if(indexProduto != -1) {
+			Produto produtoAtual = produtos.get(indexProduto);
+	        produtoAtual.setQuantidadeAdquirida(produtoAtual.getQuantidadeAdquirida() + quantidadeComprada);
+	        produtoAtual.setQuantidadeEstoque(produtoAtual.getQuantidadeAdquirida(), produtoAtual.getQuantidadeVendida());
+		}
+	}
+	
+	public void venderProduto(Produto produtoVendido, int quantidadeVendida) {
+        int indexProduto = produtos.indexOf(produtoVendido);
+        if (indexProduto != -1) {
+            Produto produtoAtual = produtos.get(indexProduto);
+            produtoAtual.setQuantidadeEstoque(produtoAtual.getQuantidadeAdquirida() ,produtoAtual.getQuantidadeVendida() +quantidadeVendida);
+        }
+    }
+	
+	
+	
 }
