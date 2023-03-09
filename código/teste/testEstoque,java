@@ -1,1 +1,15 @@
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EstoqueTest {
+
+	@Test
+    public void testAdicionarProduto() {
+        Estoque estoque = new Estoque(10);
+        Produto produto = new Produto();
+        assertTrue(estoque.adicionarProduto(produto));
+        assertEquals(1, estoque.getQuantidadeProdutos());
+    }
+}
