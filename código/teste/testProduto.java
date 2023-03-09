@@ -49,6 +49,13 @@ public class ProdutoTest {
         produto.setImpostos();
         assertEquals(impostoEsperado, produto.getImpostos(), 0.001);
     }
-
+    
+    @Test
+    public void testVerificarQuantidadeMinimaEstoque() {
+    	Produto produto = new Produto();
+    	produto.setQuantidadeAdquirida(50);
+    	produto.setQuantidadeVendida(10);
+    	produto.setQuantidadeEstoque();
+    	assertEquals(true, produto.verificarQuantidadeMinimaEstoque(30));
+    }
 }
-
