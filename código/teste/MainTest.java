@@ -41,7 +41,28 @@ class MainTest {
 
 		consultarDadosProduto();
 
-		assertEquals("Produto: produto/ Quantidade no estoque: 40/ Descricao: eh um produto/ Margem Lucro: 30/ Preco custo: 10/ Custo aquisicao: 10/ Total arrecadado: 30", estoque.consultarDadosProduto());
+		assertEquals("Produto: produto/ Quantidade no estoque: 39/ Descricao: eh um produto/ Margem Lucro: 30/ Preco custo: 10/ Custo aquisicao: 10/ Total arrecadado: 30", estoque.consultarDadosProduto());
+
+
+
+	}
+
+	@Test
+	void testConsultarDados2(){
+		Scanner scanner = new Scanner(System.in);
+		Estoque estoque = new Estoque(10);
+
+		Produto produto1 = new Produto();
+		Produto produto2 = new Produto();
+
+		estoque.adicionarProduto(produto1);
+		estoque.adicionarProduto(produto2);
+		produto1.setQuantidadeEstoque(40,1);
+		produto2.setQuantidadeEstoque(30,0);
+
+		consultarDadosEstoque();
+
+		assertEquals("Produto: produto1, Quantidade no estoque: 39/ Produto: produto2, Quantidade no estoque 29", estoque.consultarDadosEstoque());
 
 
 
