@@ -102,7 +102,10 @@ public class Estoque {
             produtoAtual.setQuantidadeEstoque(produtoAtual.getQuantidadeAdquirida() ,produtoAtual.getQuantidadeVendida() +quantidadeVendida);
         }
     }
-	
+	/**
+	* Faz o somatório de todos os produtos em estoque 
+	* @return o valor de todos os produtos em estoque somados
+	*/
 	public double getValorTotalEstoque() {
 		double valortotal =0;
 		for(Produto p: produtos) {
