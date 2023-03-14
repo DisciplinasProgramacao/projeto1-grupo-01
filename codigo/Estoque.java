@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A classe Estoque representa um conjunto de produtos em um armazém.
@@ -79,7 +80,10 @@ public class Estoque {
 	}
 	
 	
-	
+	/**
+     * Formata uma string especificada para que ela tenha seus caracteres conectados e todos em minúsculo
+     * @param str Representa a string que será formatada
+     */
 	public static String formatarString(String str) {
 	    String strSemEspacos = str.replaceAll("\\s+", "");
 	    String strMinuscula = strSemEspacos.toLowerCase();
@@ -105,13 +109,27 @@ public class Estoque {
 	/**
 	* Atualiza a quantidade vendida de um produto e a em estoque
 	* @param produtoVendido O produto vendido.
-    	* @param quantidadeVendida A quantidade vendida do produto
+    * @param quantidadeVendida A quantidade vendida do produto
 	*/
-	public void venderProduto(Produto produtoVendido, int quantidadeVendida) {
-        int indexProduto = produtos.indexOf(produtoVendido);
-        if (indexProduto != -1) {
-            Produto produtoAtual = produtos.get(indexProduto);
-            produtoAtual.setQuantidadeEstoque(produtoAtual.getQuantidadeAdquirida() ,produtoAtual.getQuantidadeVendida() +quantidadeVendida);
+	public void venderProduto(String produtoVendido, int quantidadeVendida) {
+		produtoVendido = formatarString(produtoVendido);
+		for(Produto p : produtos) {
+	        if (formatarString(produtoVendido).equals(formatarString(p.getDescricao()))) {
+	           p.setQuantidadeVendida(p.getQuantidadeVendida() + quantidadeVendida);
+	           
+	           Scanner scan = new Scanner(System.in);
+	           
+	           System.out.println("Digite 1 caso quera repor o estoque vendido e 2 caso contrário");
+	           int resp = scan.nextInt();
+	           
+	           if (resp == 1) {
+	        	   p.setQuantidadeAdquirida(quantidadeVendida + p.getQuantidadeAdquirida());   
+	        	   p.setQuantidadeEstoque(p.getQuantidadeAdquirida(), p.getQuantidadeVendida());
+	           }else {
+	        	   p.setQuantidadeEstoque(p.getQuantidadeAdquirida(), p.getQuantidadeVendida());
+	           }
+	           
+        	}
         }
     }
 	/**
