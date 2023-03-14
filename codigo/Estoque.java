@@ -27,7 +27,7 @@ public class Estoque {
 	
     /**
      * Retorna a quantidade de produtos atualmente armazenados no estoque.
-     * @return A quantidade de produtos no estoque.
+     * @return produtos.size() Representa a quantidade de produtos no estoque.
      */
 	public int getQuantidadeProdutos() {
         return produtos.size();
@@ -35,12 +35,12 @@ public class Estoque {
 	
     /**
      * Retorna uma lista de produtos que estão abaixo da quantidade mínima em estoque.
-     * @return Uma lista de produtos abaixo da quantidade mínima.
+     * @return produtosAbaixoDoMinimo Uma lista de produtos abaixo da quantidade mínima.
      */
-	public ArrayList<Produto> getProdutosAbaixoDoMinimo(){
+	public ArrayList<Produto> getProdutosAbaixoDoMinimo(int minimoPadrao){
 		ArrayList<Produto> produtosAbaixoDoMinimo = new ArrayList<Produto>();
 		for(Produto p : produtos) {
-			if(p.monitorarEstoque()) {
+			if(p.monitorarEstoque(minimoPadrao)) {
 				produtosAbaixoDoMinimo.add(p);
 			}
 		}
