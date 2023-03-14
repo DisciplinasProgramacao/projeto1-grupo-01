@@ -54,6 +54,6 @@ public class testProduto {
     public void testMonitorarEstoque() {
     	Produto produto = new Produto();
     	produto.setQuantidadeEstoque(50,10);
-    	assertEquals(true, produto.monitorarEstoque(30));
+    	assertEquals(false, produto.monitorarEstoque(30));
     }
 }
