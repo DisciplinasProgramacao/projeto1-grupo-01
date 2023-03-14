@@ -74,9 +74,10 @@ class EstoqueTest {
 			Produto produto = new Produto();
 		
 			estoque.adicionarProduto(produto);
+			produto.setDescricao("livro");
 			produto.setQuantidadeEstoque(40, 0);
 
-			estoque.venderProduto(produto, 10);
+			estoque.venderProduto("Livro", 10);
 			
 			assertEquals(30, produto.getQuantidadeEstoque());
 		}
