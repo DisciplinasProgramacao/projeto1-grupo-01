@@ -38,10 +38,10 @@ public class Estoque {
      * Retorna uma lista de produtos que estão abaixo da quantidade mínima em estoque.
      * @return produtosAbaixoDoMinimo Uma lista de produtos abaixo da quantidade mínima.
      */
-	public ArrayList<Produto> getProdutosAbaixoDoMinimo(int minimoPadrao){
+	public ArrayList<Produto> getProdutosAbaixoDoMinimo(){
 		ArrayList<Produto> produtosAbaixoDoMinimo = new ArrayList<Produto>();
 		for(Produto p : produtos) {
-			if(p.monitorarEstoque(minimoPadrao)) {
+			if(p.monitorarEstoque()) {
 				produtosAbaixoDoMinimo.add(p);
 			}
 		}
