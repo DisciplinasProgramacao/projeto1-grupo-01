@@ -67,14 +67,26 @@ public class Estoque {
      * @param remover O produto a ser removido.
      * @return true se o produto foi removido com sucesso, false caso contrário.
      */
-	public boolean removerProduto(Produto remover) {
-		int index = produtos.indexOf(remover);
-		if(index >= 0) {
-			produtos.remove(index);
-			return true;
+	public boolean removerProduto(String remover) {
+		remover = formatarString(remover);
+		for(Produto p : produtos) {
+			if(formatarString(p.getDescricao()).equals(remover)) {
+				produtos.remove(p);
+				return true;
+			}
 		}
 		return false;
 	}
+	
+	
+	
+	public static String formatarString(String str) {
+	    String strSemEspacos = str.replaceAll("\\s+", "");
+	    String strMinuscula = strSemEspacos.toLowerCase();
+	    
+	    return strMinuscula;
+	}
+
 	
     /**
      * Atualiza a quantidade adquirida de um produto após uma compra e atualiza a quantidade em estoque.
