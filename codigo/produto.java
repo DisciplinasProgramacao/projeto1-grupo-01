@@ -46,6 +46,22 @@ public class Produto {
 		this.margemLucro = 0.0;
 		this.quantidadeEstoque = 0;
 	}
+	
+	/** 
+	 * Retorna a quantidade mínima do produto no estoque
+	 * @return quantidadeMinima Representa a quantidade mínima do produto no estoque
+	 */
+	public int getQuantidadeMinima() {
+		return quantidadeMinima;
+	}
+	
+	/**
+	 * Set da quantidade mínima no estoque
+	 * @param quantidadeMinima Representa a quantidade mínima do produto no estoque
+	 */
+	public void setQuantidadeMinima(int quantidadeMinima) {
+		this.quantidadeMinima = quantidadeMinima;
+	}
 	/** 
 	 * Retorna a margem de lucro
 	 * @return margemlucro Representa a margem de lucro do produto
@@ -208,8 +224,9 @@ public class Produto {
 	 * @return false Caso o produto não tenha falta no estoque
 	 */
 	
-	public boolean monitorarEstoque(int unidadesMinimas){
+	public boolean monitorarEstoque(){
 
+		int unidadesMinimas =  this.getQuantidadeMinima();
         if(unidadesMinimas > this.getQuantidadeEstoque()) {
             System.out.println("O produto tem falta no estoque, existindo " + this.getQuantidadeEstoque() + "unidades desse produto no estoque." );
             return true;
