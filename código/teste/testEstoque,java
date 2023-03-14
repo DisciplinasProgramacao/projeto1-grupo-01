@@ -20,9 +20,10 @@ class EstoqueTest {
 	        Produto p1 = new Produto();
 	        estoque.adicionarProduto(p1);
 	        
+	        p1.setQuantidadeMinima(15);
 	        p1.setQuantidadeEstoque(15, 0);
 	
-	        ArrayList<Produto> produtosAbaixo = estoque.getProdutosAbaixoDoMinimo(15);
+	        ArrayList<Produto> produtosAbaixo = estoque.getProdutosAbaixoDoMinimo();
 	        //escreva um numero abaixo de 15
 	        assertFalse(produtosAbaixo.contains(p1));
 	    }
