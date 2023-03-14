@@ -3,7 +3,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProdutoTest {
+public class testProduto {
 
     
 
@@ -51,11 +51,9 @@ public class ProdutoTest {
     }
     
     @Test
-    public void testVerificarQuantidadeMinimaEstoque() {
+    public void testMonitorarEstoque() {
     	Produto produto = new Produto();
-    	produto.setQuantidadeAdquirida(50);
-    	produto.setQuantidadeVendida(10);
-    	produto.setQuantidadeEstoque();
-    	assertEquals(true, produto.verificarQuantidadeMinimaEstoque(30));
+    	produto.setQuantidadeEstoque(50,10);
+    	assertEquals(true, produto.monitorarEstoque(30));
     }
 }
