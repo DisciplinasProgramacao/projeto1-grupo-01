@@ -65,7 +65,7 @@ public class Produto {
 		}
 		this.margemLucro = (percentMargemLucro/100) * this.getPrecoCusto();
 		setPrecoVenda();
-	}
+	} 
 
 	/**
 	 * Retorna a decrição do produto
@@ -187,7 +187,7 @@ public class Produto {
 	 * set dos impostos sobre os produtos, sendo calculado pela soma do preço de custo mais a margem de lucro multiplicados por 1.18 subtraidos pelo preço de custo + margem de lucro
 	 */
 	public void setImpostos() {
-		this.impostos = (this.getPrecoCusto() + this.getMargemLucro()) * 1.18 - (this.getPrecoCusto() + this.getMargemLucro());
+		this.impostos = (this.getPrecoCusto() + this.getMargemLucro()) * 0.18;
 	}
 
 	 
@@ -230,4 +230,6 @@ public class Produto {
 	    this.quantidadeVendida = quantidadeVendida;
 	    this.quantidadeEstoque = this.quantidadeAdquirida - this.quantidadeVendida;
 	}
+	
+	
 }
