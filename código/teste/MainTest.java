@@ -19,9 +19,19 @@ class MainTest {
 		produto.setDescricao("Monitor");
 		
 		
-		estoque.venderProduto("Monitor", 10);
+		venderProduto(estoque);
 
 		assertEquals(30, produto.getQuantidadeEstoque());
+	}
+
+	public static void venderProduto(Estoque e) {
+		System.out.println("Digite o nome do produto que você busca vender");
+		Scanner scan = new Scanner(System.in);
+		String resp = scan.nextLine();
+		System.out.println("Digite a quantidade de produtos que deseja vender");
+		int qnt = scan.nextInt();
+		e.venderProduto(resp, qnt );
+		
 	}
 
 	@Test
