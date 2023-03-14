@@ -16,8 +16,10 @@ class MainTest {
 
 		estoque.adicionarProduto(produto);
 		produto.setQuantidadeEstoque(40, 0);
-
-		estoque.venderProduto(produto, 10);
+		produto.setDescricao("Monitor");
+		
+		
+		estoque.venderProduto("Monitor", 10);
 
 		assertEquals(30, produto.getQuantidadeEstoque());
 	}
@@ -26,7 +28,6 @@ class MainTest {
 	void testConsultarDados1(){
 		Scanner scanner = new Scanner(System.in);
 		Estoque estoque = new Estoque(10);
-
 		Produto produto = new Produto();
 
 		estoque.adicionarProduto(produto);
@@ -69,4 +70,3 @@ class MainTest {
 	}
 
 }
-
