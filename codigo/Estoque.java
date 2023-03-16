@@ -78,6 +78,17 @@ public class Estoque {
 		}
 		return false;
 	}
+
+    public Produto informarProduto(String nome){
+        
+        for(Produto p : produtos){
+            if (formatarString(nome).equals(formatarString(p.getDescricao()))) {
+                return p;
+            }
+        }
+
+        return null;
+    }   
 	
 	
 	/**
