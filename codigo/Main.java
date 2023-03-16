@@ -61,7 +61,7 @@ public class Main {
 				consultarDados(estoque); //Consultar dados de produtos individualmente e do estoque como um todo (do segundo enunciado);
 				break;
 			case 3:
-				//balancoSimplificado(); //Calcular e exibir um balanço simplificado da empresa: valor do estoque atual, valor vendido e valor gasto
+				balancoSimplificado(); //Calcular e exibir um balanço simplificado da empresa: valor do estoque atual, valor vendido e valor gasto
 									  //em pedidos de reposição
 				break;
 			case -1:
@@ -98,4 +98,21 @@ public class Main {
 
         System.out.println(result.toString());
     }
+	public static void balancoSimplificado() {
+		double acumulaVendido = 0;
+		double acumulaPrecoVendido = 0;
+		double acumulaGastoReposicao = 0;
+		
+		for (Produto produto : produtos) {
+			acumulaVendido = produto.getQuantidadeVendida;
+			for (int i = 0; i < acumulaVendido; i++) {
+				acumulaPrecoVendido += produto.precoVenda;
+				acumulaGastoReposicao += produto.precoCusto;
+			}
+		}
+		double totalEstoque = estoque.getValorTotalEstoque;
+		System.out.Println("Valor total no estoque "+ totalEstoque);
+		System.out.println("O valor vendido e "+ acumulaPrecoVendido);
+		System.out.println("O valor gasto em reposicao e "+ acumulaGastoReposicao);
+	}
 }
