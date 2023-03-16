@@ -1,118 +1,160 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-
-public class Main {
-
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int resp;
-		// String str;
-		int num;
-		
-		System.out.println("Primeiramente o estoque e seus produtos devem ser criados");
-		System.out.println("Digite a quantidade máxima de produtos que o estoque deve suportar");
-		num = scan.nextInt();
-        scan.nextLine(); 
-        
-		Estoque estoque = new Estoque(num);
-		System.out.println("Adicione no mínimo um produto no estoque");
-		do {
-			Produto p = new Produto();
-			System.out.println("Digite o nome do produto");
-			String str = scan.nextLine();
-			p.setDescricao(str);
-			System.out.println("Digite o preco de custo do produto");
-			num = scan.nextInt();
-			p.setPrecoVenda();
-			System.out.println("Digite a quantidade adquirida do produto");
-			num = scan.nextInt();
-			p.setQuantidadeAdquirida(num);
-			System.out.println("Digite o custo de aquisição do produto");
-			num = scan.nextInt();
-			p.setCustoAquisicao(num);
-			System.out.println("Digite a margem de lucro do produto (deve estar entre 30 e 80)");
-			num = scan.nextInt();
-			p.setMargemLucro(num);
-			p.setImpostos();
-			System.out.println("Digite a quantidade mínima do produto que deve haver no estoque");
-			num = scan.nextInt();
-			p.setQuantidadeMinima(num);
-			p.setQuantidadeEstoque(p.getQuantidadeAdquirida(), p.getQuantidadeVendida());
-			estoque.adicionarProduto(p);
-			
-			System.out.println("Cadastro de produto finalizado, deseja cadastrar outro produto?(1)Sim (-1)Não");
-			resp = scan.nextInt();
-		}while(resp == 1);
-        
-		System.out.println("Agora as funcionalidades do sistema estão liberadas");
-        System.out.println("Digite:\n1 - Vender Produto \n2- Consultar Produtos no Estoque\n3 - Balança do Empresa\n-1 - Finalizar Programa");
-        scan.nextLine();
-
-        int func = scan.nextInt();		
-        
-
-		do {
-            
-			switch (func) {
-			case 1: 
-				venderProduto(estoque); //retirando do estoque e fazer pedido de produtos para repor o estoque;
-				break;
-			case 2:
-				consultarDados(estoque); //Consultar dados de produtos individualmente e do estoque como um todo (do segundo enunciado);
-				break;
-			case 3:
-				balancoSimplificado(estoque); //Calcular e exibir um balanço simplificado da empresa: valor do estoque atual, valor vendido e valor gasto
-									  //em pedidos de reposição
-				break;
-			case -1:
-				System.out.println("O programa será finalizado");
-				break;
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + func);
-			}
-			
-
-            System.out.println("Digite:\n1 - Vender Produto \n2- Consultar Produtos no Estoque\n3 - Balança do Empresa\n-1 - Finalizar Programa");
-            scan.nextLine();
-            func = scan.nextInt();		
-			
-		}while(func != -1);
-
+/**
+ * A classe Estoque representa um conjunto de produtos em um armazém.
+ * Ela é responsável por gerenciar os produtos e controlar o estoque.
+ */
+public class Estoque {
+	
+    /**
+     * O tamanho máximo do estoque.
+     */
+	private int tamanhoMaximo;
+	
+    /**
+     * A lista de produtos armazenados no estoque.
+     */
+	public ArrayList<Produto> produtos;
+	
+    /**
+     * Construtor que cria um novo estoque com um tamanho máximo especificado.
+     * @param tamanhoMaximo O tamanho máximo do estoque.
+     */
+	public Estoque(int tamanhoMaximo) {
+		this.tamanhoMaximo = tamanhoMaximo;
+		this.produtos = new ArrayList<Produto>();
 	}
 	
-	public static void venderProduto(Estoque e) {
-		System.out.println("Digite o nome e quantidade do produto que você quer vender");
-		Scanner scan = new Scanner(System.in);
-		String resp = scan.nextLine();
-		int qnt = scan.nextInt();
-		e.venderProduto(resp, qnt );
-		
-	}
-
-    public static void consultarDados(Estoque e){
-        System.out.println("Digite o nome do produto que você busca");
-        Scanner scan = new Scanner(System.in);
-		String resp = scan.nextLine();
-
-        Produto result = e.informarProduto(resp);
-
-        System.out.println(result.toString());
+    /**
+     * Retorna a quantidade de produtos atualmente armazenados no estoque.
+     * @return produtos.size() Representa a quantidade de produtos no estoque.
+     */
+	public int getQuantidadeProdutos() {
+        return produtos.size();
     }
-	public static void balancoSimplificado(Estoque estoque) {
-		double acumulaVendido = 0;
-		double acumulaPrecoVendido = 0;
-		double acumulaGastoReposicao = 0;
-		
-		for (Produto produto : estoque.produtos) {
-			acumulaVendido = produto.getQuantidadeVendida();
-			for (int i = 0; i < acumulaVendido; i++) {
-				acumulaPrecoVendido += produto.getPrecoVenda();
-				acumulaGastoReposicao += produto.getPrecoVenda();
+	
+    /**
+     * Retorna uma lista de produtos que estão abaixo da quantidade mínima em estoque.
+     * @return produtosAbaixoDoMinimo Uma lista de produtos abaixo da quantidade mínima.
+     */
+	public ArrayList<Produto> getProdutosAbaixoDoMinimo(){
+		ArrayList<Produto> produtosAbaixoDoMinimo = new ArrayList<Produto>();
+		for(Produto p : produtos) {
+			if(p.monitorarEstoque()) {
+				produtosAbaixoDoMinimo.add(p);
 			}
 		}
-		double totalEstoque = estoque.getValorTotalEstoque();
-		System.out.println("Valor total no estoque "+ totalEstoque);
-		System.out.println("O valor vendido e "+ acumulaPrecoVendido);
-		System.out.println("O valor gasto em reposicao e "+ acumulaGastoReposicao);
+		return produtosAbaixoDoMinimo;
 	}
+	
+    /**
+     * Adiciona um novo produto ao estoque, se houver espaço suficiente.
+     * @param novo O novo produto a ser adicionado.
+     * @return true se o produto foi adicionado com sucesso, false caso contrário.
+     */
+	public boolean adicionarProduto(Produto novo) {
+		if(produtos.size() < tamanhoMaximo) {
+			produtos.add(novo);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+    /**
+     * Remove um produto específico do estoque, se ele existir.
+     * @param remover O produto a ser removido.
+     * @return true se o produto foi removido com sucesso, false caso contrário.
+     */
+	public boolean removerProduto(String remover) {
+		remover = formatarString(remover);
+		for(Produto p : produtos) {
+			if(formatarString(p.getDescricao()).equals(remover)) {
+				produtos.remove(p);
+				return true;
+			}
+		}
+		return false;
+	}
+
+    public Produto informarProduto(String nome){
+        
+        for(Produto p : produtos){
+            if (formatarString(nome).equals(formatarString(p.getDescricao()))) {
+                return p;
+            }
+        }
+
+        return null;
+    }   
+	
+	
+	/**
+     * Formata uma string especificada para que ela tenha seus caracteres conectados e todos em minúsculo
+     * @param str Representa a string que será formatada
+     */
+	public static String formatarString(String str) {
+	    String strSemEspacos = str.replaceAll("\\s+", "");
+	    String strMinuscula = strSemEspacos.toLowerCase();
+	    
+	    return strMinuscula;
+	}
+
+	
+    /**
+     * Atualiza a quantidade adquirida de um produto após uma compra e atualiza a quantidade em estoque.
+     * @param produtoComprado O produto comprado.
+     * @param quantidadeComprada A quantidade comprada do produto.
+     */
+	public void comprarProduto(Produto produtoComprado,int quantidadeComprada) {
+		int indexProduto = produtos.indexOf(produtoComprado);
+		if(indexProduto != -1) {
+			Produto produtoAtual = produtos.get(indexProduto);
+	        produtoAtual.setQuantidadeAdquirida(produtoAtual.getQuantidadeAdquirida() + quantidadeComprada);
+	        produtoAtual.setQuantidadeEstoque(produtoAtual.getQuantidadeAdquirida(), produtoAtual.getQuantidadeVendida());
+		}
+	}
+	
+	/**
+	* Atualiza a quantidade vendida de um produto e a em estoque
+	* @param produtoVendido O produto vendido.
+    * @param quantidadeVendida A quantidade vendida do produto
+	*/
+	public void venderProduto(String produtoVendido, int quantidadeVendida) {
+		produtoVendido = formatarString(produtoVendido);
+		for(Produto p : produtos) {
+	        if (formatarString(produtoVendido).equals(formatarString(p.getDescricao()))) {
+	           p.setQuantidadeVendida(p.getQuantidadeVendida() + quantidadeVendida);
+	           
+	           Scanner scan = new Scanner(System.in);
+	           
+	           System.out.println("Digite 1 caso quera repor o estoque vendido e 2 caso contrário");
+	           int resp = scan.nextInt();
+	           
+	           if (resp == 1) {
+	        	   p.setQuantidadeAdquirida(quantidadeVendida + p.getQuantidadeAdquirida());   
+	        	   p.setQuantidadeEstoque(p.getQuantidadeAdquirida(), p.getQuantidadeVendida());
+	           }else {
+	        	   p.setQuantidadeEstoque(p.getQuantidadeAdquirida(), p.getQuantidadeVendida());
+	           }
+	           
+        	}
+        }
+    }
+	/**
+	* Faz o somatório de todos os produtos em estoque 
+	* @return o valor de todos os produtos em estoque somados
+	*/
+	public double getValorTotalEstoque() {
+		double valortotal =0;
+		for(Produto p: produtos) {
+			valortotal += p.getPrecoVenda() * p.getQuantidadeEstoque();
+		}
+		return valortotal;
+	}
+
+	
+	
 }
