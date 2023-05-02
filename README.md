@@ -5,7 +5,7 @@ Sistema simples de gestão de estoque, com cálculo de preço de venda de produt
 
 ---
 
-## Nota base do grupo: 9
+## Nota base do grupo: 8,5
 
 A nota final, que é individual, se dará pela nota acima, multiplicada por um peso entre 0 e 1 relativo ao acompanhamento semanal do projeto. Lembre-se: não é só a entrega do produto finalizado que importa, é todo o processo de sua construção e as entregas parciais para o “cliente”.
 
@@ -47,7 +47,8 @@ Elementos presentes no diagrama porém incondizentes com a implementação:
 	Poderiam ter criado métodos privados que seriam acessado por meio dos métodos publicos de get e set
 	Poderiam ter criado a estrutura organizacional separando código dos testes
 
-### Documentação de código: 3 pontos 
+### Documentação de código: 2,5 pontos 
+	- Parcial, não construiram o Plano de testes e Backlog do projeto (requisitos implementados)
 	
 	
 ### Testes (quantidade e qualidade): 2,5/4 pontos 
